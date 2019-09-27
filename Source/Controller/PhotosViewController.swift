@@ -473,8 +473,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 // MARK: PHPhotoLibraryChangeObserver
 extension PhotosViewController: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        DispatchQueue.main.async(execute: { () -> Void in
-            guard let photosDataSource = photosDataSource, let collectionView = collectionView else {
+        DispatchQueue.main.async(execute: { [weak self] () -> Void in
+            guard let photosDataSource = self?.photosDataSource, let collectionView = self?.collectionView else {
                 return
             }
           
