@@ -473,11 +473,11 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 // MARK: PHPhotoLibraryChangeObserver
 extension PhotosViewController: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        guard let photosDataSource = photosDataSource, let collectionView = collectionView else {
-            return
-        }
-        
         DispatchQueue.main.async(execute: { () -> Void in
+            guard let photosDataSource = photosDataSource, let collectionView = collectionView else {
+                return
+            }
+          
             if let photosChanges = changeInstance.changeDetails(for: photosDataSource.fetchResult as! PHFetchResult<PHObject>) {
                 // Update collection view
                 // Alright...we get spammed with change notifications, even when there are none. So guard against it
